@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--输出日志-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--设置别名-->
+    <typeAliases>
+        <!--name:实体类所在的包名-->
+        <package name="com.node.bbs.settings.domain"/>
+    </typeAliases>
+
+    <mappers>
+        <!--name:包名，这个包中的所有mapper.xml文件能够一次性加载-->
+        <package name="com.node.bbs.settings.dao"/>
+    </mappers>
+</configuration>
+
+
+

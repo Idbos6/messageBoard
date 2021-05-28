@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.node.bbs.settings.dao.ReplyDao">
+
+    <insert id="save">
+
+        insert into tbl_reply(
+
+            id,
+            reply,
+            messageId,
+            createTime
+
+        ) values (
+
+            #{id},
+            #{reply},
+            #{messageId},
+            #{createTime}
+
+        )
+
+    </insert>
+
+    <select id="selectById" resultType="Reply">
+
+        select * from tbl_reply where messageId=#{messageId} order by createTime desc
+
+
+    </select>
+
+    <select id="getEmail" resultType="String">
+
+        select u.email
+        from tbl_message m
+        join tbl_user u
+        on m.userId=u.id
+        where m.id=#{messageId}
+
+
+    </select>
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.node.bbs.settings.dao.MessageDao">
+
+    <select id="getTotalByCondition" resultType="int">
+        select count(*) from tbl_message
+        <where>
+            <if test="userName!=null and userName!=''">
+                userName like '%' #{userName} '%'
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and createTime &gt; #{createTime}
+            </if>
+            <if test="title!=null and title!=''">
+                and title like '%' #{title} '%'
+            </if>
+            <if test="message!=null and message!=''">
+                and message like '%' #{message} '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="getActivityListByCondition" resultType="Message">
+        select
+        id,
+        userName,
+        createTime,
+        title,
+        message
+        from tbl_message
+        <where>
+            <if test="userName!=null and userName!=''">
+                userName like '%' #{userName} '%'
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and createTime &gt; #{createTime}
+            </if>
+            <if test="title!=null and title!=''">
+                and title like '%' #{title} '%'
+            </if>
+            <if test="message!=null and message!=''">
+                and message like '%' #{message} '%'
+            </if>
+        </where>
+        order by createTime desc
+        limit #{skipCount},#{pageSize}
+    </select>
+
+
+    <insert id="add">
+
+        insert into tbl_message(
+
+            id,
+            userId,
+            message,
+            createTime,
+            title,
+            userName
+
+        ) values (
+
+           #{id},
+           #{userId},
+           #{message},
+           #{createTime},
+           #{title},
+           #{userName}
+
+        )
+
+    </insert>
+
+    <delete id="delete">
+
+        delete from tbl_message where id=#{id}
+
+    </delete>
+
+    <select id="isAdmin" resultType="String">
+
+        select userId from tbl_message where id=#{id}
+
+    </select>
+
+    <select id="selectById" resultType="String">
+
+        select message from tbl_message where id=#{messageId}
+
+    </select>
+
+
+
+</mapper>
